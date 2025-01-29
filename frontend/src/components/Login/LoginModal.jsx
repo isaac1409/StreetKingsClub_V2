@@ -3,6 +3,29 @@ import "./LoginModal.css";
 
 function LoginModal() {
   
+  const iniciarSesion = async () => {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+  
+    const response = await fetch("http://localhost:8080/api/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+  
+    const data = await response.json();
+  
+    if (response.ok) {
+      localStorage.setItem("token", data.token); // Guarda el token
+      console.log("Login exitoso");
+  
+      // Ahora obtenemos los datos del dashboard
+      const token = localStorage.getItem("token");
+  };
+};
+  
     const [isModalOpen, setModalOpen] = useState(false);
 
     const openModal = () => setModalOpen(true);
@@ -54,7 +77,7 @@ function LoginModal() {
               <input type="password" name="password" id="password" placeholder="Password" />
             </div>
             <div className="modal-buttons">
-              <button className="input-button">Iniciar Sesión</button>
+              <button className="input-button" onClick={iniciarSesion}>Iniciar Sesión</button>
             </div>
           </div>
           <div className="modal-right">
