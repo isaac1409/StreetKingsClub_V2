@@ -1,5 +1,6 @@
 import React from "react";
-import LoginModal from "./components/Login/LoginModal";
+import LoginModal from "./pages/Login/LoginModal";
+import CrudComponent from "./components/CrudComponent";
 
 function App() {
   return (
